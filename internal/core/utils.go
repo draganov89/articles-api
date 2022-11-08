@@ -15,21 +15,17 @@ func PrepareMarketingData(articles []s.Article, ads []s.Ad) []interface{} {
 	result := make([]interface{}, 0, resultLen)
 
 	offset := 0
-	for {
+	for offset*BATCH_SIZE < len(articles) {
 		from := offset * BATCH_SIZE
 		to := from + BATCH_SIZE
-		if from >= len(articles) {
-			break
-		}
+
 		if to > len(articles) {
 			to = len(articles)
 		}
 
-		var article interface{}
 		articlesBatch := articles[from:to]
 		for _, val := range articlesBatch {
-			article = val
-			result = append(result, article)
+			result = append(result, val)
 		}
 
 		if len(articlesBatch) < 5 {

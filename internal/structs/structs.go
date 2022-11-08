@@ -18,6 +18,8 @@ type Article struct {
 	CleanImage   string  `json:"cleanImage"`
 }
 
+// Could've done it with only one struct ...
+
 type AdsResponseObject struct {
 	HttpStatus int         `json:"httpStatus"`
 	Response   AdsResponse `json:"response"`
