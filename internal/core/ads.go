@@ -9,19 +9,19 @@ import (
 	s "articles-api/internal/structs"
 )
 
-type IArticlesAPI interface {
-	GetArticles() ([]s.Article, error)
+type IAdsAPI interface {
+	GetAds() ([]s.Ad, error)
 }
 
-type ArticlesAPI struct {
+type AdsAPI struct {
 }
 
-func NewArticlesAPI() IArticlesAPI {
-	return &ArticlesAPI{}
+func NewAdsAPI() IAdsAPI {
+	return &AdsAPI{}
 }
 
-func (a *ArticlesAPI) GetArticles() ([]s.Article, error) {
-	url := "https://storage.googleapis.com/aller-structure-task/articles.json"
+func (a *AdsAPI) GetAds() ([]s.Ad, error) {
+	url := "https://storage.googleapis.com/aller-structure-task/contentmarketing.json"
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Printf("error getting data from %s\n", url)
@@ -36,7 +36,7 @@ func (a *ArticlesAPI) GetArticles() ([]s.Article, error) {
 		return nil, err
 	}
 
-	var response s.ArticlesResponseObject
+	var response s.AdsResponseObject
 
 	err = json.Unmarshal(bytes, &response)
 	if err != nil {

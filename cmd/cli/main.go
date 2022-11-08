@@ -1,22 +1,14 @@
 package main
 
 import (
+	"articles-api/internal/handlers"
 	"log"
 	"net/http"
-
-	c "articles-api/internal/core"
 )
 
 func main() {
 
-	api := c.NewArticlesAPI()
-
-	articles := api.GetArticles()
-
-	log.Println(articles)
-
-	// http.HandleFunc("/hello", hello)
-	// http.HandleFunc("/headers", headers)
-
-	http.ListenAndServe(":8090", nil)
+	http.HandleFunc("/articles", handlers.HandleArticles)
+	log.Println("Service starting... Listening on port 8092...")
+	http.ListenAndServe(":8092", nil)
 }
